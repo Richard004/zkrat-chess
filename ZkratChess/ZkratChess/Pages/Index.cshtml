@@ -1,0 +1,116 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>
+    Chessboard
+</h1>
+<div class="chessboard-class">
+    <div class="row-class">
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+    </div>
+    <div class="row-class">
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+    </div>
+    <div class="row-class">
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+    </div>
+    <div class="row-class">
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+    </div>
+    <div class="row-class">
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+    </div>
+    <div class="row-class">
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+        <div class="field-black-class"></div>
+        <div class="field-white-class"></div>
+    </div>
+    <div class="row-class">
+        <div class="field-white-class">p</div>
+        <div class="field-black-class">p</div>
+        <div class="field-white-class">p</div>
+        <div class="field-black-class">p</div>
+        <div class="field-white-class">p</div>
+        <div class="field-black-class">p</div>
+        <div class="field-white-class">p</div>
+        <div class="field-black-class">p</div>
+    </div>
+    <div class="row-class">
+        <div class="field-black-class">V</div>
+        <div class="field-white-class">J</div>
+        <div class="field-black-class">S</div>
+        <div class="field-white-class">D</div>
+        <div class="field-black-class">K</div>
+        <div class="field-white-class">S</div>
+        <div class="field-black-class">J</div>
+        <div class="field-white-class">V</div>
+    </div>
+</div>
+
+<style>
+    .field-white-class {
+        background-color: floralwhite;
+        width: 30px;
+        height: 30px;
+    }
+    .field-black-class {
+        background-color: rgb(100,100,100);
+        width: 30px;
+        height: 30px;
+    }
+    .row-class {
+        position: relative;
+        display: inline-flex;
+        text-align: center;
+        color: black;
+    }
+    .chessboard-class {
+        position: relative;
+        display: flex;
+        flex-direction:column;
+    }
+
+</style>
