@@ -9,6 +9,9 @@ namespace ZkratChess.Pages
 {
     public class IndexModel : PageModel
     {
+        [BindProperty]
+        public string Step { get; set; }
+
         /*  chessPiece  = color+role
                 nic     0  0000 0000
 
@@ -28,24 +31,45 @@ namespace ZkratChess.Pages
         */
 
         private byte[,] chessBoard = new byte[8,8]{
+            { 2, 3, 4, 5, 6, 4, 3, 2},
+            { 1, 1, 1, 1, 1, 1, 1, 1},
             { 0, 0, 0, 0, 0, 0, 0, 0},
             { 0, 0, 0, 0, 0, 0, 0, 0},
             { 0, 0, 0, 0, 0, 0, 0, 0},
             { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0}};
+            {17,17,17,17,17,17,17,17},
+            {18,19,20,21,22,20,19,18}};
 
+        public byte GetChessPiece(int i,int j)
+        {
+            return chessBoard[i, j];
+        }
 
-        private bool isWhite(byte chessPiece)
+        public bool isWhiteField(int i,int j)
+        {
+            return (i + j + 1) % 2 == 0;
+        }
+
+        public  bool isWhite(byte chessPiece)
         {
             return chessPiece < 16;
         }
 
-        private byte getRole(byte chessPiece)
+        public byte getRole(byte chessPiece)
         {
             return (byte)(chessPiece & 0b00000111);
+        }
+
+        public char getRoleChar(byte role)
+        {
+            char[] table = {' ', 'p', 'V', 'J','S','D','K' };
+            return table[role];
+        }
+
+        public char getCharAt(int i,int j)
+        {
+            var role = getRole(GetChessPiece(i, j));
+            return getRoleChar(role);
         }
 
         public void OnGet()
