@@ -14,10 +14,11 @@
         <div class="row-class">
         @for (int j = 0; j < 8; j++)
         {
-            <div class=@(
-                (Model.isWhiteField(i,j)?"field-white-class":"field-black-class")+" "+
-                (Model.isWhiteFigure(i,j)?"figure-white-class": "figure-black-class"))>
-                @Model.getCharAt(i, j)
+            <div class=
+                 "@( "field-class "+
+                     (Model.isWhiteField(i,j)  ? "field-white-class" : "field-black-class")+" "
+                    +(Model.isWhiteFigure(i,j) ? "figure-white-class": "figure-black-class") )">
+                <span>@Model.getCharAt(i, j)</span>
             </div>
         }
         </div>
@@ -31,15 +32,20 @@
 
 
 <style>
-    .field-white-class {
-        background-color: #cccccc;
+    .field-class {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 50px;
         height: 50px;
+        font-size  :large;
+    }
+
+    .field-white-class {
+        background-color: #cccccc;
     }
     .field-black-class {
         background-color: rgb(100,100,100);
-        width: 50px;
-        height: 50px;
     }
 
     .figure-white-class {
@@ -62,5 +68,9 @@
         flex-direction: column;
         padding: 5px;
     }
-
+    span {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
 </style>
