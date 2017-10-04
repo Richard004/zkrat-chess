@@ -12,22 +12,34 @@
     @for (int i = 0; i < 8; i++)
     {
         <div class="row-class">
-        @for (int j = 0; j < 8; j++)
-        {
-            <div class=
-                 "@( "field-class "+
-                     (Model.isWhiteField(i,j)  ? "field-white-class" : "field-black-class")+" "
-                    +(Model.isWhiteFigure(i,j) ? "figure-white-class": "figure-black-class") )">
-                <span>@Model.getCharAt(i, j)</span>
+            <div class="field-class">
+                <span>@((char)('1' + 7-i))</span>
             </div>
-        }
+            @for (int j = 0; j < 8; j++)
+            {
+                <div class=
+                     "@( "field-class "+
+                         (Model.isWhiteField(i,j)  ? "field-white-class" : "field-black-class")+" "
+                        +(Model.isWhiteFigure(i,j) ? "figure-white-class": "figure-black-class") )">
+                    <span>@Model.getCharAt(i, j)</span>
+                </div>
+            }
         </div>
     }
+    <div class="row-class">
+        <div class="field-class"></div>
+        @for (int j = 0; j < 8; j++)
+        {
+            <div class="field-class">
+                <span>@((char)('A'+j))</span>
+            </div>
+        }
+    </div>
 </div>
 <br />
 <form method="post">
     <input asp-for="Step" name="step" value="" />
-    <button type="submit" class="btn btn-default">Go</button>
+    <button type="submit" class="btn btn-default">Go</button> <span> Example: A2A4</span>
 </form>
 
 
