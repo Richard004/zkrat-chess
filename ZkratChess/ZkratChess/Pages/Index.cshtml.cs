@@ -55,7 +55,12 @@ namespace ZkratChess.Pages
             return (i+j+1) % 2 == 0;
         }
 
-        public  bool isWhite(byte chessPiece)
+        public bool isWhiteFigure(int i, int j)
+        {
+            return isWhite(GetChessPiece(i, j));
+        }
+
+        public bool isWhite(byte chessPiece)
         {
             return chessPiece < 16;
         }

@@ -14,7 +14,9 @@
         <div class="row-class">
         @for (int j = 0; j < 8; j++)
         {
-            <div class=@(Model.isWhiteField(i,j)?"field-white-class":"field-black-class")>
+            <div class=@(
+                (Model.isWhiteField(i,j)?"field-white-class":"field-black-class")+" "+
+                (Model.isWhiteFigure(i,j)?"figure-white-class": "figure-black-class"))>
                 @Model.getCharAt(i, j)
             </div>
         }
@@ -30,7 +32,7 @@
 
 <style>
     .field-white-class {
-        background-color: floralwhite;
+        background-color: #cccccc;
         width: 50px;
         height: 50px;
     }
@@ -39,6 +41,15 @@
         width: 50px;
         height: 50px;
     }
+
+    .figure-white-class {
+        color: white;
+    }
+
+    .figure-black-class {
+        color: black;
+    }
+
     .row-class {
         position: relative;
         display: inline-flex;
