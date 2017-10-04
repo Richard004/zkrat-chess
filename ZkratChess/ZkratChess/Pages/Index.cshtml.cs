@@ -30,7 +30,7 @@ namespace ZkratChess.Pages
                 b K    22  0001 0110
         */
 
-        private byte[,] chessBoard = new byte[8,8]{
+        private static byte[,] chessBoard = new byte[8,8]{
             { 2, 3, 4, 5, 6, 4, 3, 2},
             { 1, 1, 1, 1, 1, 1, 1, 1},
             { 0, 0, 0, 0, 0, 0, 0, 0},
@@ -45,9 +45,14 @@ namespace ZkratChess.Pages
             return chessBoard[i, j];
         }
 
+        public void SetChessPiece(int i, int j, byte chessPiece)
+        {
+            chessBoard[i, j] = chessPiece;
+        }
+
         public bool isWhiteField(int i,int j)
         {
-            return (i + j + 1) % 2 == 0;
+            return (i+j+1) % 2 == 0;
         }
 
         public  bool isWhite(byte chessPiece)
@@ -75,6 +80,29 @@ namespace ZkratChess.Pages
         public void OnGet()
         {
 
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var step = Step;
+            int from_i = 7-(step[1]-'1');
+            int from_j =    step[0]-'A';
+            int to_i = 7-(step[3]-'1');
+            int to_j =    step[2]-'A';
+
+            var chessPieceInTo = GetChessPiece(to_i, to_j);
+            var chessPieceInFrom = GetChessPiece(from_i, from_j);
+
+            SetChessPiece(from_i, from_j, 0);
+            SetChessPiece(to_i, to_j, chessPieceInFrom);
+
+
+            return Page();
         }
     }
 }
