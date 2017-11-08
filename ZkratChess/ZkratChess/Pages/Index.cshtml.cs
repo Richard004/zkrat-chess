@@ -82,6 +82,40 @@ namespace ZkratChess.Pages
             return getRoleChar(role);
         }
 
+        public string getFigureStringAt(int i,int j)
+        {
+            byte role = getRole(GetChessPiece(i, j));
+            string BootStrapFigure = null;
+            if(role == 1)
+            {
+                BootStrapFigure = @"<span class=""glyphicon glyphicon-pawn""></span>";
+            }
+            if (role == 2)
+            {
+                BootStrapFigure =  @"<span class=""glyphicon glyphicon-tower""></span>";
+            }
+            if (role == 3)
+            {
+                BootStrapFigure = @"<span class=""glyphicon glyphicon-knight""></span>";
+            }
+            if (role == 4)
+            {
+                BootStrapFigure = @"<span class=""glyphicon glyphicon-bishop""></span>";
+            }
+            if (role == 5)
+            {
+                BootStrapFigure = @"<span class=""glyphicon glyphicon-queen""></span>";
+            }
+            if (role == 6)
+            {
+                BootStrapFigure = @"<span class=""glyphicon glyphicon-king""></span>";
+            }
+           
+
+            return BootStrapFigure;
+            
+        }
+
         public void OnGet()
         {
 

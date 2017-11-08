@@ -5,7 +5,7 @@
 }
 
 <h1>
-    Chessboard
+    <span class="glyphicon glyphicon-knight">ŠACHY</span>
 </h1>
 
 <div class="chessboard-class">
@@ -21,7 +21,7 @@
                      "@( "field-class "+
                          (Model.isWhiteField(i,j)  ? "field-white-class" : "field-black-class")+" "
                         +(Model.isWhiteFigure(i,j) ? "figure-white-class": "figure-black-class") )">
-                    <span>@Model.getCharAt(i, j)</span>
+                    <span>@Html.Raw(Model.getFigureStringAt(i, j))</span>
                 </div>
             }
         </div>
