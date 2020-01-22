@@ -4,11 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ZkratChess.Services;
 
 namespace ZkratChess.Pages
 {
     public class IndexModel : PageModel
     {
+        ChessPersistenceService persistenceService = new ChessPersistenceService();
+
+        [BindProperty(SupportsGet = true)]
+        public string Game { get; set; }
+
         [BindProperty]
         public string Step { get; set; }
 
@@ -30,15 +36,7 @@ namespace ZkratChess.Pages
                 b K    22  0001 0110
         */
 
-        private static byte[,] chessBoard = new byte[8,8]{
-            { 2, 3, 4, 5, 6, 4, 3, 2},
-            { 1, 1, 1, 1, 1, 1, 1, 1},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            {17,17,17,17,17,17,17,17},
-            {18,19,20,21,22,20,19,18}};
+        private byte[,] chessBoard;
 
         public byte GetChessPiece(int i,int j)
         {
@@ -118,7 +116,7 @@ namespace ZkratChess.Pages
 
         public void OnGet()
         {
-
+            chessBoard = persistenceService.LoadOrCreateNewGame(Game);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -128,6 +126,7 @@ namespace ZkratChess.Pages
                 return Page();
             }
 
+            chessBoard = persistenceService.LoadBoard(Game);
             var step = Step;
             int from_i = 7-(step[1]-'1');
             int from_j =    step[0]-'A';
@@ -140,6 +139,7 @@ namespace ZkratChess.Pages
             SetChessPiece(from_i, from_j, 0);
             SetChessPiece(to_i, to_j, chessPieceInFrom);
 
+            persistenceService.SaveBoard(Game, chessBoard);
 
             return Page();
         }
