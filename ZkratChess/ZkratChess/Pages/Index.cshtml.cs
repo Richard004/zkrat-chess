@@ -114,13 +114,24 @@ namespace ZkratChess.Pages
             
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            chessBoard = persistenceService.LoadOrCreateNewGame(Game);
+            if (string.IsNullOrEmpty(Game))
+                return Redirect("home");
+
+            if (!persistenceService.ExistsGame(Game))
+                return Redirect("home");
+
+            chessBoard = persistenceService.LoadBoard(Game);
+            if (chessBoard == null)
+                return Redirect("home");
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            ModelState.AddModelError("step", "Invalid move!");
             if (!ModelState.IsValid)
             {
                 return Page();

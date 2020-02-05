@@ -46,6 +46,11 @@ namespace ZkratChess.Services
             return fileName;
         }
 
+        public bool ExistsGame(string gameName)
+        {
+            string fileName = GameToFileName(gameName);
+            return File.Exists(fileName);
+        }
 
         public byte[,] LoadOrCreateNewGame(string gameName)
         {
