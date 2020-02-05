@@ -131,11 +131,11 @@ namespace ZkratChess.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            ModelState.AddModelError("step", "Invalid move!");
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //ModelState.AddModelError("step", "Invalid move!");
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
 
             chessBoard = persistenceService.LoadBoard(Game);
             var step = Step;
