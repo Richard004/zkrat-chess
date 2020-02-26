@@ -131,13 +131,9 @@ namespace ZkratChess.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            //ModelState.AddModelError("step", "Invalid move!");
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
             chessBoard = persistenceService.LoadBoard(Game);
+
+            
             var step = Step;
             int from_i = 7-(step[1]-'1');
             int from_j =    step[0]-'A';
@@ -146,6 +142,17 @@ namespace ZkratChess.Pages
 
             var chessPieceInTo = GetChessPiece(to_i, to_j);
             var chessPieceInFrom = GetChessPiece(from_i, from_j);
+
+            if (chessPieceInFrom == 0)
+            {
+                ModelState.AddModelError("step", "Invalid move! Protože nemůžeme táhnout z prázdného pole!");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
 
             SetChessPiece(from_i, from_j, 0);
             SetChessPiece(to_i, to_j, chessPieceInFrom);

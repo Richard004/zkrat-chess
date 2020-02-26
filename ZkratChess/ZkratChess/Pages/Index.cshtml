@@ -42,6 +42,10 @@
     <button type="submit" class="btn btn-default">Go</button> <span> Example: A2A4</span>
 </form>
 
+@if (!ModelState.IsValid)
+{
+    <div class="alert alert-warning">@ModelState["step"].Errors.First().ErrorMessage!</div>
+}
 
 <style>
     .field-class {
