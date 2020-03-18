@@ -143,9 +143,62 @@ namespace ZkratChess.Pages
             var chessPieceInTo = GetChessPiece(to_i, to_j);
             var chessPieceInFrom = GetChessPiece(from_i, from_j);
 
+            var from_color = isWhite(chessPieceInFrom);
+            var to_color = isWhite(chessPieceInTo);
+
+            var from_role = getRole(chessPieceInFrom);
+            var to_role = getRole(chessPieceInTo);
+
             if (chessPieceInFrom == 0)
             {
                 ModelState.AddModelError("step", "Invalid move! Protože nemůžeme táhnout z prázdného pole!");
+            }
+
+            if (from_i==to_i && from_j==to_j)
+            {
+                ModelState.AddModelError("step", "Invalid move! Táhnout je potřeba někam jinam než na výchozí políčko!");
+            }
+
+            if (chessPieceInTo!=0 && from_color == to_color)
+            {
+                ModelState.AddModelError("step", "Invalid move! Není povoleno sebrat figurku stejné barvy!");
+            }
+
+            if (from_role == 1)
+            {
+                var iTolerance = (from_color==true) ? ( +1 ) : ( -1 );
+                var colorName = (from_color == true) ? "Bílý" : "Černý";
+
+                if (chessPieceInTo != 0) //neco bereme
+                {
+                    if (! (to_i-from_i== iTolerance && (from_j-to_j==1 || from_j - to_j == -1)) )
+                    {
+                        ModelState.AddModelError("step", "Invalid move! "+colorName+" pěšec může brát jen šikmo o 1");
+                    }
+                }
+                else//nic nebereme
+                {
+                    if (from_j != to_j)
+                    {
+                        ModelState.AddModelError("step", "Invalid move! " + colorName + " pěšec nemůže táhnout dostrany");
+                    }
+
+                    if ((from_color == true) ? (from_i >= 2) : (from_i <= 5))
+                    {
+                        if (!((to_i - from_i) == iTolerance))
+                        {
+                            ModelState.AddModelError("step", "Invalid move! " + colorName + " pěšec může táhnout pouze o 1 pole dopředu");
+                        }
+                    }
+                    else
+                    {
+                        if (!((to_i - from_i) == iTolerance || (to_i - from_i) == 2*iTolerance))
+                        {
+                            ModelState.AddModelError("step", "Invalid move! " + colorName + " pěšec v základní pozici může táhnout pouze o 1 nebo 2 pole dopředu");
+                        }
+                    }
+                }
+
             }
 
             if (!ModelState.IsValid)
