@@ -44,11 +44,6 @@ namespace ZkratChess.Pages
             return chessBoard[i, j];
         }
 
-        public void SetChessPiece(int i, int j, byte chessPiece)
-        {
-            chessBoard[i, j] = chessPiece;
-        }
-
         public bool isWhiteField(int i,int j)
         {
             return (i+j+1) % 2 == 0;
@@ -69,17 +64,6 @@ namespace ZkratChess.Pages
             return (byte)(chessPiece & 0b00000111);
         }
 
-        public char getRoleChar(byte role)
-        {
-            char[] table = {' ', 'p', 'V', 'J','S','D','K' };
-            return table[role];
-        }
-
-        public char getCharAt(int i,int j)
-        {
-            var role = getRole(GetChessPiece(i, j));
-            return getRoleChar(role);
-        }
 
         public string getFigureStringAt(int i,int j)
         {
@@ -130,7 +114,7 @@ namespace ZkratChess.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             chessBoard = persistenceService.LoadBoard(Game);
 
