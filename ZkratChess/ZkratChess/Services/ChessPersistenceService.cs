@@ -3,20 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ZkratChess.Library;
 
 namespace ZkratChess.Services
 {
     public class ChessPersistenceService
     {
-        private static byte[,] chessBoardNewGame = new byte[8, 8]{
-            { 2, 3, 4, 5, 6, 4, 3, 2},
-            { 1, 1, 1, 1, 1, 1, 1, 1},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            {17,17,17,17,17,17,17,17},
-            {18,19,20,21,22,20,19,18}};
 
 
         public void SaveBoard(string gameName,byte[,] board)
@@ -57,7 +49,7 @@ namespace ZkratChess.Services
             string fileName = GameToFileName(gameName);
             if (!File.Exists(fileName))
             {
-                SaveBoard(gameName, chessBoardNewGame);
+                SaveBoard(gameName, ChessBoard.NewGame);
             }
             return LoadBoard(gameName);
         }

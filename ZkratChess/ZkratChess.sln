@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZkratChess", "ZkratChess\ZkratChess.csproj", "{C613A315-28F4-4305-8B51-B6964672CAC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZkratChess", "ZkratChess\ZkratChess.csproj", "{C613A315-28F4-4305-8B51-B6964672CAC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZkratChess.Tests", "ZkratChess.Tests\ZkratChess.Tests.csproj", "{126FF328-4B22-4ED9-BE1A-B8774C36FCB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZkratChess.Library", "ZkratChess.Library\ZkratChess.Library.csproj", "{7E8DC936-7C23-4165-AEAF-ECD3BAEF4849}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{C613A315-28F4-4305-8B51-B6964672CAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C613A315-28F4-4305-8B51-B6964672CAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C613A315-28F4-4305-8B51-B6964672CAC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{126FF328-4B22-4ED9-BE1A-B8774C36FCB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{126FF328-4B22-4ED9-BE1A-B8774C36FCB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{126FF328-4B22-4ED9-BE1A-B8774C36FCB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{126FF328-4B22-4ED9-BE1A-B8774C36FCB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E8DC936-7C23-4165-AEAF-ECD3BAEF4849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E8DC936-7C23-4165-AEAF-ECD3BAEF4849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E8DC936-7C23-4165-AEAF-ECD3BAEF4849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E8DC936-7C23-4165-AEAF-ECD3BAEF4849}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
