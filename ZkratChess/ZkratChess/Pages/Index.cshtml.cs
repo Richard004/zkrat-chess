@@ -39,14 +39,14 @@ namespace ZkratChess.Pages
 
         private byte[,] chessBoard;
 
-        public byte GetChessPiece(int i,int j)
+        public byte GetChessPiece(int i, int j)
         {
             return chessBoard[i, j];
         }
 
-        public bool isWhiteField(int i,int j)
+        public bool isWhiteField(int i, int j)
         {
-            return (i+j+1) % 2 == 0;
+            return (i + j + 1) % 2 == 0;
         }
 
         public bool isWhiteFigure(int i, int j)
@@ -65,38 +65,17 @@ namespace ZkratChess.Pages
         }
 
 
+        private static string[] figures = new string[] {
+            "","pawn","tower","knight","bishop","queen","king"};
+
         public string getFigureStringAt(int i,int j)
         {
             byte role = getRole(GetChessPiece(i, j));
-            string BootStrapFigure = null;
-            if(role == 1)
-            {
-                BootStrapFigure = @"<span class=""glyphicon glyphicon-pawn""></span>";
-            }
-            if (role == 2)
-            {
-                BootStrapFigure =  @"<span class=""glyphicon glyphicon-tower""></span>";
-            }
-            if (role == 3)
-            {
-                BootStrapFigure = @"<span class=""glyphicon glyphicon-knight""></span>";
-            }
-            if (role == 4)
-            {
-                BootStrapFigure = @"<span class=""glyphicon glyphicon-bishop""></span>";
-            }
-            if (role == 5)
-            {
-                BootStrapFigure = @"<span class=""glyphicon glyphicon-queen""></span>";
-            }
-            if (role == 6)
-            {
-                BootStrapFigure = @"<span class=""glyphicon glyphicon-king""></span>";
-            }
-           
+            string BootStrapFigure = role == 0
+               ? null
+               : @"<span class=""glyphicon glyphicon-"+figures[role] +@"""></span>";
 
             return BootStrapFigure;
-            
         }
 
         public IActionResult OnGet()
