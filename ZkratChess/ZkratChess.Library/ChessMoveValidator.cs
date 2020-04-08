@@ -80,39 +80,43 @@ namespace ZkratChess.Library
 
             if (from_role == 1)
             {
-                var iTolerance = (from_color == true) ? (+1) : (-1);
-                var colorName = (from_color == true) ? "Bílý" : "Černý";
+                ValidatePesak(chessPieceInTo, from_color);
+            }
+        }
 
-                if (chessPieceInTo != 0) //neco bereme
+        private void ValidatePesak(byte chessPieceInTo, bool from_color)
+        {
+            var iTolerance = (from_color == true) ? (+1) : (-1);
+            var colorName = (from_color == true) ? "Bílý" : "Černý";
+
+            if (chessPieceInTo != 0) //neco bereme
+            {
+                if (!(to_i - from_i == iTolerance && (from_j - to_j == 1 || from_j - to_j == -1)))
                 {
-                    if (!(to_i - from_i == iTolerance && (from_j - to_j == 1 || from_j - to_j == -1)))
-                    {
-                        stepErrors.Add("Invalid move! " + colorName + " pěšec může brát jen šikmo o 1");
-                    }
+                    stepErrors.Add("Invalid move! " + colorName + " pěšec může brát jen šikmo o 1");
                 }
-                else//nic nebereme
+            }
+            else//nic nebereme
+            {
+                if (from_j != to_j)
                 {
-                    if (from_j != to_j)
-                    {
-                        stepErrors.Add("Invalid move! " + colorName + " pěšec nemůže táhnout dostrany");
-                    }
-
-                    if ((from_color == true) ? (from_i >= 2) : (from_i <= 5))
-                    {
-                        if (!((to_i - from_i) == iTolerance))
-                        {
-                            stepErrors.Add("Invalid move! " + colorName + " pěšec může táhnout pouze o 1 pole dopředu");
-                        }
-                    }
-                    else
-                    {
-                        if (!((to_i - from_i) == iTolerance || (to_i - from_i) == 2 * iTolerance))
-                        {
-                            stepErrors.Add("Invalid move! " + colorName + " pěšec v základní pozici může táhnout pouze o 1 nebo 2 pole dopředu");
-                        }
-                    }
+                    stepErrors.Add("Invalid move! " + colorName + " pěšec nemůže táhnout dostrany");
                 }
 
+                if ((from_color == true) ? (from_i >= 2) : (from_i <= 5))
+                {
+                    if (!((to_i - from_i) == iTolerance))
+                    {
+                        stepErrors.Add("Invalid move! " + colorName + " pěšec může táhnout pouze o 1 pole dopředu");
+                    }
+                }
+                else
+                {
+                    if (!((to_i - from_i) == iTolerance || (to_i - from_i) == 2 * iTolerance))
+                    {
+                        stepErrors.Add("Invalid move! " + colorName + " pěšec v základní pozici může táhnout pouze o 1 nebo 2 pole dopředu");
+                    }
+                }
             }
         }
 
