@@ -10,8 +10,7 @@ namespace ZkratChess.Services
     public class ChessPersistenceService
     {
 
-
-        public void SaveBoard(string gameName,byte[,] board)
+        public void SaveBoard(string gameName, GameState gameState)
         {
             var fileName = GameToFileName(gameName);
             var dirName = Path.GetDirectoryName(fileName);
@@ -22,7 +21,9 @@ namespace ZkratChess.Services
 
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
-                    file.WriteByte(board[i, j]);
+                    file.WriteByte(gameState.Board[i, j]);
+
+            file.WriteByte(gameState.IsWhiteMove ? (byte)1 : (byte)0);
 
             file.Close();
         }
@@ -44,7 +45,7 @@ namespace ZkratChess.Services
             return File.Exists(fileName);
         }
 
-        public byte[,] LoadOrCreateNewGame(string gameName)
+        public GameState LoadOrCreateNewGame(string gameName)
         {
             string fileName = GameToFileName(gameName);
             if (!File.Exists(fileName))
@@ -54,7 +55,7 @@ namespace ZkratChess.Services
             return LoadBoard(gameName);
         }
 
-        public byte[,] LoadBoard(string gameName)
+        public GameState LoadBoard(string gameName)
         {
             string fileName = GameToFileName(gameName);
             var file = File.OpenRead(fileName);
@@ -64,8 +65,15 @@ namespace ZkratChess.Services
                 for (int j = 0; j < 8; j++)
                     board[i, j] = (byte)file.ReadByte();
 
+            var isWhiteByte = (byte)file.ReadByte();
+            var isWhiteMove = isWhiteByte == (byte)1;
+
             file.Close();
-            return board;
+            return new GameState
+            {
+                Board = board,
+                IsWhiteMove = isWhiteMove
+            };
         }
     }
 }

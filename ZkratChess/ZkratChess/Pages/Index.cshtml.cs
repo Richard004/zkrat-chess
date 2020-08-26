@@ -37,11 +37,11 @@ namespace ZkratChess.Pages
                 b K    22  0001 0110
         */
 
-        private byte[,] chessBoard;
+        private GameState chessBoard;
 
         public byte GetChessPiece(int i, int j)
         {
-            return chessBoard[i, j];
+            return chessBoard.Board[i, j];
         }
 
         public bool isWhiteField(int i, int j)
@@ -67,6 +67,13 @@ namespace ZkratChess.Pages
 
         private static string[] figures = new string[] {
             "","pawn","tower","knight","bishop","queen","king"};
+
+        public string getColorOnMove()
+        {
+            return chessBoard.IsWhiteMove 
+                ? "White" 
+                : "Black";
+        }
 
         public string getFigureStringAt(int i,int j)
         {

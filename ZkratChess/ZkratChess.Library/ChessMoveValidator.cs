@@ -6,25 +6,25 @@ namespace ZkratChess.Library
 
     public class ChessMoveValidator
     {
-        private byte[,] chessBoard;
+        private GameState gameState;
         private int from_i;
         private int from_j;
         private int to_i;
         private int to_j;
         private List<string> stepErrors = new List<string>();
 
-        public ChessMoveValidator(byte[,] chessBoard, int from_i, int from_j, int to_i, int to_j)
+        public ChessMoveValidator(GameState gameState, int from_i, int from_j, int to_i, int to_j)
         {
-            this.chessBoard = chessBoard;
+            this.gameState = gameState;
             this.from_i = from_i;
             this.from_j = from_j;
             this.to_i = to_i;
             this.to_j = to_j;
         }
 
-        public ChessMoveValidator(byte[,] chessBoard, string step)
+        public ChessMoveValidator(GameState gameState, string step)
         {
-            this.chessBoard = chessBoard;
+            this.gameState = gameState;
             this.from_i = 7 - (step[1] - '1');
             this.from_j = step[0] - 'A';
             this.to_i = 7 - (step[3] - '1');
@@ -33,7 +33,7 @@ namespace ZkratChess.Library
 
         public byte GetChessPiece(int i, int j)
         {
-            return chessBoard[i, j];
+            return gameState.Board[i, j];
         }
 
         public bool isWhite(byte chessPiece)
@@ -48,7 +48,7 @@ namespace ZkratChess.Library
 
         public void SetChessPiece(int i, int j, byte chessPiece)
         {
-            chessBoard[i, j] = chessPiece;
+            gameState.Board[i, j] = chessPiece;
         }
 
 
@@ -134,7 +134,7 @@ namespace ZkratChess.Library
         {
             SetChessPiece(to_i, to_j, GetChessPieceInFrom());
             SetChessPiece(from_i, from_j, 0);
-
+            gameState.IsWhiteMove = !gameState.IsWhiteMove;
         }
 
     }
