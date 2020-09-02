@@ -82,6 +82,14 @@ namespace ZkratChess.Library
             {
                 ValidatePesak(chessPieceInTo, from_color);
             }
+
+            if (from_color != gameState.IsWhiteMove)
+            {
+                //stepErrors.Add("Invalid move! Na tahu je xxxxxx !".Replace("xxxxxx",gameState.IsWhiteMove ? "bílá":"černá"));
+                //stepErrors.Add("Invalid move! Na tahu je "+(gameState.IsWhiteMove ? "bílá" : "černá")+" !");
+                stepErrors.Add($"Invalid move! Na tahu je {(gameState.IsWhiteMove ? "bílá" : "černá")} !");
+            }
+
         }
 
         private void ValidatePesak(byte chessPieceInTo, bool from_color)

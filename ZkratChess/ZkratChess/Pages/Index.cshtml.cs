@@ -37,11 +37,11 @@ namespace ZkratChess.Pages
                 b K    22  0001 0110
         */
 
-        private GameState chessBoard;
+        private GameState gameState;
 
         public byte GetChessPiece(int i, int j)
         {
-            return chessBoard.Board[i, j];
+            return gameState.Board[i, j];
         }
 
         public bool isWhiteField(int i, int j)
@@ -70,7 +70,7 @@ namespace ZkratChess.Pages
 
         public string getColorOnMove()
         {
-            return chessBoard.IsWhiteMove 
+            return gameState.IsWhiteMove 
                 ? "White" 
                 : "Black";
         }
@@ -93,8 +93,8 @@ namespace ZkratChess.Pages
             if (!persistenceService.ExistsGame(Game))
                 return Redirect("home");
 
-            chessBoard = persistenceService.LoadBoard(Game);
-            if (chessBoard == null)
+            gameState = persistenceService.LoadBoard(Game);
+            if (gameState == null)
                 return Redirect("home");
 
             return Page();
@@ -102,9 +102,9 @@ namespace ZkratChess.Pages
 
         public IActionResult OnPost()
         {
-            chessBoard = persistenceService.LoadBoard(Game);
+            gameState = persistenceService.LoadBoard(Game);
 
-            var moveValidator = new ChessMoveValidator(chessBoard, Step);
+            var moveValidator = new ChessMoveValidator(gameState, Step);
             moveValidator.Validate();
             foreach(var error in moveValidator.GetAllErrors())
             {
@@ -117,7 +117,7 @@ namespace ZkratChess.Pages
             }
 
             moveValidator.MakeMove();
-            persistenceService.SaveBoard(Game, chessBoard);
+            persistenceService.SaveBoard(Game, gameState);
 
             return Page();
         }
