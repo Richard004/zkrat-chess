@@ -50,7 +50,7 @@ namespace ZkratChess.Services
             string fileName = GameToFileName(gameName);
             if (!File.Exists(fileName))
             {
-                SaveBoard(gameName, ChessBoard.NewGame);
+                SaveBoard(gameName, ChessBoard.NewGameWhite);
             }
             return LoadBoard(gameName);
         }

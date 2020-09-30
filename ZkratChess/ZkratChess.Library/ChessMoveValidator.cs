@@ -81,6 +81,10 @@ namespace ZkratChess.Library
             if (from_role == 1)
             {
                 ValidatePesak(chessPieceInTo, from_color);
+            } 
+            if (from_role == 2)
+            {
+                ValidateVez();
             }
 
             if (from_color != gameState.IsWhiteMove)
@@ -90,6 +94,14 @@ namespace ZkratChess.Library
                 stepErrors.Add($"Invalid move! Na tahu je {(gameState.IsWhiteMove ? "bílá" : "černá")} !");
             }
 
+        }
+
+        private void ValidateVez()
+        {
+            if (!(from_i == to_i || from_j == to_j))
+            {
+                stepErrors.Add("Invalid move! Vež může táhnout pouze horizontalně nebo svisle!");
+            }
         }
 
         private void ValidatePesak(byte chessPieceInTo, bool from_color)
